@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Square } from "./components/Square"
+import { Modal } from "./components/Modal"
 
 const TURNS = {
   X: "X",
@@ -51,12 +52,29 @@ export const App = () => {
       }
     }
 
+    if (!boardToCheck.includes(null)) {
+      return setWinner(false)
+    }
+
     return null
+  }
+
+  const resetGame = () => {
+    setBoard(Array(9).fill(null))
+    setTurn(TURNS.X)
+    setWinner(null)
   }
 
   return (
     <main className='grid place-content-center place-items-center gap-12 h-screen'>
       <h1 className="text-4xl">Tic-Tac-Toe</h1>
+
+      <button
+        onClick={resetGame}
+        className="p-4 bg-[#414e6e]"
+      >
+        Empezar denuevo
+      </button>
 
       <section className='grid grid-cols-3 gap-2 bg-blue-800'>
         {board.map((square, index) => {
@@ -80,6 +98,15 @@ export const App = () => {
           {TURNS.O}
         </Square>
       </section>
+
+      {
+        winner !== null && (
+          <Modal
+            winner={winner}
+            resetGame={resetGame}
+          />
+        )
+      }
     </main>
   )
 }
