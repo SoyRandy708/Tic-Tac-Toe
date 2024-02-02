@@ -1,4 +1,6 @@
 export const Modal = ({ winner, resetGame }) => {
+  if (winner === null) return
+
   const mensaje = winner ? `El ganador es ${winner}` : "Empate"
 
   return (

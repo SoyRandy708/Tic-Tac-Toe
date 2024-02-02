@@ -1,22 +1,9 @@
 import { useState } from "react"
+import confetti from "canvas-confetti"
 import { Square } from "./components/Square"
 import { Modal } from "./components/Modal"
-
-const TURNS = {
-  X: "X",
-  O: "O"
-}
-
-const WINNER_MOVES = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6]
-]
+import { TURNS } from "./constants"
+import { checkWinner } from "./lib"
 
 export const App = () => {
   const [board, setBoard] = useState(Array(9).fill(null))
@@ -35,28 +22,11 @@ export const App = () => {
 
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
+      confetti()
       setWinner(newWinner)
+    } else if (!newBoard.includes(null)) {
+      setWinner(false)
     }
-  }
-
-  const checkWinner = (boardToCheck) => {
-    for (const moves of WINNER_MOVES) {
-      const [a, b, c] = moves
-
-      if (
-        boardToCheck[a] &&
-        boardToCheck[a] === boardToCheck[b] &&
-        boardToCheck[a] === boardToCheck[c]
-      ) {
-        return boardToCheck[a]
-      }
-    }
-
-    if (!boardToCheck.includes(null)) {
-      return setWinner(false)
-    }
-
-    return null
   }
 
   const resetGame = () => {
@@ -99,14 +69,12 @@ export const App = () => {
         </Square>
       </section>
 
-      {
-        winner !== null && (
-          <Modal
-            winner={winner}
-            resetGame={resetGame}
-          />
-        )
-      }
+
+      <Modal
+        winner={winner}
+        resetGame={resetGame}
+      />
+
     </main>
   )
 }
