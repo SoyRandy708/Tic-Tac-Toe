@@ -1,6 +1,8 @@
 # Tic Tac Toe
 Este proyecto es una implementación simple del clásico juego Tic Tac Toe (Tres en línea) desarrollado utilizando React para la lógica del juego y Tailwind CSS para el estilo. El juego es perfecto para principiantes que quieran aprender React y experimentar con estilos modernos usando Tailwind.
 
+![Tic Tac Toe](<Tic-tac-toe.png>)
+
 ## Características
 - Interfaz de usuario intuitiva y atractiva.
 - Funcionalidad clásica de Tic Tac Toe con turnos alternativos entre "X" y "O".
