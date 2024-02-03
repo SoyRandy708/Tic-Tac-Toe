@@ -2,6 +2,7 @@ import { useState } from "react"
 import confetti from "canvas-confetti"
 import { Square } from "./components/Square"
 import { Modal } from "./components/Modal"
+import { ButtonReset } from "./components/ButtonReset"
 import { TURNS } from "./constants"
 import { checkWinner, resetGameStorage, saveGameStorage } from "./lib"
 
@@ -52,17 +53,12 @@ export const App = () => {
   }
 
   return (
-    <main className='grid place-content-center place-items-center gap-12 h-screen'>
-      <h1 className="text-4xl">Tic-Tac-Toe</h1>
+    <main className='grid place-content-center place-items-center gap-12 h-screen bg-custom-one'>
+      <h1 className="text-4xl font-semibold">Tic-Tac-Toe</h1>
 
-      <button
-        onClick={resetGame}
-        className="p-4 bg-[#414e6e]"
-      >
-        Empezar denuevo
-      </button>
+      <ButtonReset resetGame={resetGame} />
 
-      <section className='grid grid-cols-3 gap-2 bg-blue-800'>
+      <section className='grid grid-cols-3 gap-2 bg-custom-two'>
         {board.map((square, index) => {
           return (
             <Square
